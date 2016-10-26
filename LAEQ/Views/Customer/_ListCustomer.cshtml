@@ -1,0 +1,78 @@
+﻿@using LAEQ.ViewModel
+@model ViewCustomer
+@{
+    ViewBag.Title = "_ListCustomer";
+}
+
+<div class="container">
+    <h4>Result : Customer </h4>
+
+    <div class="form-horizontal">
+        <table id="customer" class="table table-bordered">
+            <thead>
+                <tr class="background-docker">
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Contact Name
+                    </th>
+                    <th>
+                        Job Position
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Mobile
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ListCustomer.Count != 0)
+                {
+                foreach (var item in Model.ListCustomer)
+                {
+                    <tr>
+                        <td>
+                          @Html.ActionLink((string)item.Name, "Details", new { id = item.Id })
+                        </td>
+                        @if (item.ContactCustomerId != null)
+                        {
+                        <td>
+                            @item.ContactCustomerId.Title @item.ContactCustomerId.ContactName
+                        </td>
+                        <td>
+                           @item.ContactCustomerId.JobPosition
+                        </td>
+                        <td>
+                            @item.ContactCustomerId.Phone
+                        </td>
+                        <td>
+                            @item.ContactCustomerId.Mobile
+                        </td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        }
+                    </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="text-center">
+                        <td colspan="5">No data available in table</td>
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+

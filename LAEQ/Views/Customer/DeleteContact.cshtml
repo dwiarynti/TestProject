@@ -1,0 +1,44 @@
+﻿@using LAEQ.ViewModel
+@model ViewCustomerContact
+@{
+    ViewBag.Title = "DeleteContact";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">Delete Contact</div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <h4 class="control-label col-md-5">Are you sure you want to delete this?</h4>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ContactName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.ContactName</p>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(model => model.Id)
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Delete" class="btn background-docker" />
+                            <input type="button" value="Cancel" class="btn background-docker" onclick="window.location.href='@Url.Action("Details","Customer" , new { id = Model.CustomerId })'" />
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+

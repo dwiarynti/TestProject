@@ -1,0 +1,72 @@
+﻿@using LAEQ.ViewModel
+@model ViewUser
+@{
+    ViewBag.Title = "ListUser";
+}
+
+
+<br />
+<div class="form-horizontal">
+    <div class="panel-group ">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <h4 class="marginleft">User : <input type="button" value="Create " class="btn background-docker" onclick="window.location.href='@Url.Action("Register","Account")'" /> </h4>
+                <br />
+                <div class="container">
+
+                    <div class="form-horizontal">
+                        <table id="machine" class="table table-bordered">
+                            <thead>
+                                <tr class="background-docker">
+                                    <th>
+                                       UserName
+                                    </th>
+                                    <th>
+                                        Role
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ string datanull = "-";}
+                                @foreach (var item in Model.ListUser)
+                                {
+                                    <tr>
+                                        <td>@item.Username</td>
+                                        <td>
+                                           @if (item.roleNames.Count > 0)
+                                           {
+                                                foreach (var rolename in item.roleNames)
+                                                {
+                                                    @rolename
+                                               }
+                                           }
+                                           else
+                                           {
+                                            @datanull
+                                           }
+                                        </td >
+                                        <td>
+                                            
+                                            <input type="button" value="Assign Role " class="btn background-docker" onclick="window.location.href='@Url.Action("AssignRole","Account" , new { id = item.Id })'" />
+                                            <input type="button" value="Delete Role from User " class="btn background-docker" onclick="window.location.href='@Url.Action("DeleteUserRole","Account" , new { id = item.Id })'" />
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

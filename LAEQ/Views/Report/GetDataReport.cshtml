@@ -1,0 +1,97 @@
+﻿@using LAEQ.ViewModel
+@model ViewReport
+@{
+    ViewBag.Title = "Report";
+    ViewBag.Description = "New Description";
+}
+
+
+
+<br />
+<div class="form-horizontal">
+    <div class="panel-group ">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <h4 class="marginleft">Machine : Result  </h4>
+                <br />
+                <div class="container">
+                    
+                    <div class="form-horizontal">
+                   <table id="machine" summary="" rules="groups" frame="hsides" border="2" class="table table-bordered">
+                    
+                    <caption><B>PT Louis Alain </B><br />
+                             Rental Data
+                    </caption>
+                    <colgroup align="center"></colgroup>
+                    <colgroup align="left"></colgroup>
+                    <colgroup span="2" align="center"></colgroup>
+                    <colgroup span="3" align="center"></colgroup>
+                    <thead>
+        <tr class="background-docker">
+            <th>
+                Machine ID
+            </th>
+            <th>
+                Serial Number
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Tenant
+            </th>
+            <th>
+                Start - End
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Rent != null)
+        {
+        foreach (var item in Model.Rent)
+        {
+            <tr>
+
+                <td><a style="cursor:pointer" onclick="window.location.href='@Url.Action("Details", "Rent", new { id = item.Id })'">@item.MachineID</a></td>
+                <td>@item.SerialNumber</td>
+                <td>@item.Status</td>
+                <td><a style="cursor:pointer" onclick="window.location.href='@Url.Action("Details", "Customer", new { id = item.CustomerId })'">@item.CustomerName</a></td>
+                <td>@item.StartDate.ToShortDateString() - @item.EndDate.ToShortDateString()</td>
+
+
+            </tr>
+        }
+        }
+        @if (Model.Project != null)
+        {
+        foreach (var item2 in Model.Project)
+        {
+            <tr>
+                <td><a style="cursor:pointer" onclick="window.location.href='@Url.Action("Details", "Project", new { id = item2.Id })'">@item2.MachineID</a></td>
+                <td>@item2.SerialNumber</td>
+                <td>@item2.Status</td>
+                <td>@item2.Location</td>
+                <td>@item2.StartDate.ToShortDateString() - @item2.EndDate.ToShortDateString()</td>
+
+            </tr>
+        }
+        }
+
+    </tbody>
+</table>
+
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

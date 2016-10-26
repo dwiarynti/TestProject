@@ -1,0 +1,92 @@
+﻿@using LAEQ.ViewModel
+@model ViewProject
+@{
+    ViewBag.Title = "Details";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <br />
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <h4 class="marginleft">Details Project</h4>
+                <hr />
+                <div class="panel-body">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MachineId, "Machine ID", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    <p class="form-control-static">@Model.Machine</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Location, "Location", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    <p class="form-control-static">@Model.Location</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    <p class="form-control-static">@Model.StartDate.ToShortDateString()</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    <p class="form-control-static">@Model.EndDate.ToShortDateString()</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ReturnDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @if (Model.ReturnDate != null)
+                                    {
+                                    <p class="form-control-static">@Model.ReturnDate.Value.ToShortDateString()</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="form-control-static"> - </p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    <p class="form-control-static">@Model.Remark</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-10">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                    <input type="button" value="Edit" class="btn background-docker" onclick="window.location.href='@Url.Action("Edit", "Project", new { id = Model.Id })'" />
+                                    <input type="button" value="Delete" class="btn background-docker" onclick="window.location.href='@Url.Action("Delete", "Project", new { id = Model.Id })'" />
+                                    }
+                                    <input type="button" value="Back to List" class="btn background-docker" onclick="window.location.href='@Url.Action("Index","Project")'" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+}
+

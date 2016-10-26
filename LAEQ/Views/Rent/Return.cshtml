@@ -1,0 +1,109 @@
+﻿@using LAEQ.ViewModel
+@model ViewRent
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="~/Scripts/Laeq.js"></script>
+<script>
+    var Js = new Laeq_LaeqRent();
+    $(document).ready(function()
+    {
+        Js.Initialize();
+        $("#ReturnDate").datepicker();
+        $("#EndDate").datepicker();
+    })
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <br />
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <h4 class="marginleft">Return Rent</h4>
+                <hr />
+                <div class="panel-body">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        @Html.HiddenFor(model=>model.Id)
+                        @Html.HiddenFor(model => model.CustomerId)
+                        @Html.HiddenFor(model => model.StartDate)
+                        @Html.HiddenFor(model => model.MachineId)
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MachineId, "Machine ID", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    <p class="form-control-static">@Model.Machine</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CustomerId, "Customer", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    <p class="form-control-static">@Model.CustomerName</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    <p class="form-control-static">@Model.StartDate.ToShortDateString()</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "End Date", @Value = Model.EndDate.ToShortDateString() , Required = true } })
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RentPriceText, "Rent Price", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.RentPriceText, new { htmlAttributes = new { @class = "form-control number", @placeholder = "Rent Price", @Value = Model.RentPrice , Required = true } })
+                                    @Html.ValidationMessageFor(model => model.RentPriceText, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                           
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ReturnDate, "Return Date", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.ReturnDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Return Date" , Required = true } })
+                                        @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.TextAreaFor(model => model.Remark, new { @class = "form-control", @placeholder = "Remark" })
+                                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-10">
+                                    <input type="submit" value="Save" class="btn background-docker" />
+                                    <input type="button" value="Back to Details" class="btn background-docker" onclick="window.location.href='@Url.Action("Details","Rent", new { id = Model.Id })'" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+}
+
+

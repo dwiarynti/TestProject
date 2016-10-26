@@ -1,0 +1,86 @@
+﻿@using LAEQ.ViewModel
+@model ViewMachine
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<script>
+    var Js;
+    $(document).ready(function()
+    {
+     
+        $("#machine").dataTable();
+
+    })
+   
+
+
+</script>
+
+<br />
+<div class="form-horizontal">
+    <div class="panel-group ">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <h4 class="marginleft">Machine :
+                @if(User.IsInRole("Admin"))
+                {
+                    <input type="button" value="Create " class="btn background-docker" onclick="window.location.href='@Url.Action("Create","Machine")'" />
+                } 
+                </h4>
+                <br />
+                <div class="container">
+                    
+                    <div class="form-horizontal">
+                        <table id="machine" class="table table-bordered">
+                            <thead>
+                                <tr class="background-docker">
+                                    <th>
+                                       Machine ID
+                                    </th>
+                                    <th>
+                                       Serial Number
+                                    </th>
+                                    <th>
+                                        Brand
+                                    </th>
+                                    <th>
+                                        Model
+                                    </th>
+                                    <th>
+                                        Capacity
+                                    </th>
+                                    <th>
+                                       Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var item in Model.ListMachine)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink((string)item.MachineID ,"Details", new { id = item.Id })</td>
+                                        <td>@item.SerialNumber</td>
+                                        <td>@item.Brand</td>
+                                        <td>@item.Model</td>
+                                        <td>@item.Capacity</td>
+                                        <td>@item.Status</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+        </div>
+
+    </div>
+</div>
+</div>

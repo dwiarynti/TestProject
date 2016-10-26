@@ -1,0 +1,100 @@
+﻿@using LAEQ.ViewModel
+@model ViewRent
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    var Js;
+    $(document).ready(function()
+    {
+
+        $("#Rent").dataTable();
+
+    })
+
+
+
+</script>
+
+<br />
+<div class="form-horizontal">
+    <div class="panel-group ">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <h4 class="marginleft">
+                    Rents :
+                    @if (User.IsInRole("Admin") || User.IsInRole("So"))
+                    {
+                        <input type="button" value="Create " class="btn background-docker" onclick="window.location.href='@Url.Action("Create", "Rent")'" />
+                    }
+                </h4>
+                <br />
+                <div class="container">
+
+                    <div class="form-horizontal">
+                        <table id="Rent" class="table table-bordered">
+                            <thead>
+                                <tr class="background-docker">
+                                    <th>
+                                        Machine ID
+                                    </th>
+
+                                    <th>
+                                        Customer
+                                    </th>
+                                    <th>
+                                        Start Date
+                                    </th>
+                                    <th>
+                                        End Date
+                                    </th>
+                                    <th>
+                                        Rent Price
+                                    </th>
+                                    <th>
+                                        Return
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.ListRent)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink((string)item.Machine, "Details", new { id = item.Id })</td>
+                                        <td>@item.CustomerName</td>
+                                        <td>@item.StartDate.ToShortDateString()</td>
+                                        <td>@item.EndDate.ToShortDateString()</td>
+                                        <td>@item.RentPrice.ToString("N")</td>
+@if (User.IsInRole("Admin") || User.IsInRole("So"))
+{
+                                        if (item.ReturnDate == null)
+                                        {
+                                            <td><center><input type="button" value="Return " class="btn background-docker" onclick="window.location.href='@Url.Action("Return", "Rent", new { id = item.Id })'" /></center></td>
+                                        }
+                                        else
+                                        {
+                                            <td>@item.ReturnDate.Value.ToShortDateString()</td>
+                                        }
+}
+else
+{
+    <td></td>
+}
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

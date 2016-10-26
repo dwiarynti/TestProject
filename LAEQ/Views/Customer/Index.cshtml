@@ -1,0 +1,45 @@
+﻿@using LAEQ.ViewModel
+@model ViewCustomer
+<script src="~/Scripts/Laeq.js"></script>
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    var Js;
+    $(document).ready(function()
+    {
+        Js = new Laeq_LaeqCustomer();
+    })
+
+
+   
+</script>
+
+<br />
+<div class="form-horizontal">
+    <div class="panel-group ">
+        <div class="panel panel-default">
+            <div class="panel-body">
+              
+                <div class="form-group" id="customernamegroup" style="padding-top:25px; padding-left:10px;">
+                    <label class="control-label col-sm-2" for="customername">CUSTOMER NAME</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="Name" placeholder="SEARCH CUSTOMER NAME">
+                    </div>
+                </div>
+
+                <div class="form-group" style="padding-left:10px;">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="button" class="btn background-docker" value="Search" onclick="Js.Search()">
+                        <input type="button" value="Create" class="btn background-docker" onclick="window.location.href='@Url.Action("Create","Customer")'" />
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <div id="Detail">
+            </div>
+            </div>
+
+        </div>
+    </div>
